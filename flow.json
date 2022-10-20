@@ -8,6 +8,28 @@
         "env": []
     },
     {
+        "id": "182d3223c1260b67",
+        "type": "tab",
+        "label": "Camera Flow",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "f842624d5e0544e8",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "0342a0cdf5d7ca65",
+        "type": "sqlitedb",
+        "db": "/data/database.db",
+        "mode": "RWC"
+    },
+    {
         "id": "ad650e799ceb7d26",
         "type": "inject",
         "z": "cc585ba53d34a911",
@@ -48,5 +70,355 @@
         "x": 770,
         "y": 300,
         "wires": []
+    },
+    {
+        "id": "1260dc43a233b4b8",
+        "type": "inject",
+        "z": "182d3223c1260b67",
+        "name": "Camera",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 250,
+        "y": 520,
+        "wires": [
+            [
+                "c3c377905c3e4515"
+            ]
+        ]
+    },
+    {
+        "id": "c3c377905c3e4515",
+        "type": "function",
+        "z": "182d3223c1260b67",
+        "name": "Get variables",
+        "func": "msg.params = { $id: flow.get(\"cameraID\"), $num: flow.get(\"numDetected\") };\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 520,
+        "wires": [
+            [
+                "113d021c60870a78",
+                "94069236aba25289"
+            ]
+        ]
+    },
+    {
+        "id": "ce2fe3fa876da4c7",
+        "type": "inject",
+        "z": "182d3223c1260b67",
+        "name": "Camera ID 1",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "id",
+                "v": "1",
+                "vt": "num"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 270,
+        "y": 80,
+        "wires": [
+            [
+                "ac8f78b9fd53299a"
+            ]
+        ]
+    },
+    {
+        "id": "1fe193152ae4d1ce",
+        "type": "inject",
+        "z": "182d3223c1260b67",
+        "name": "numDetected 1",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "numDetected",
+                "v": "1",
+                "vt": "num"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 280,
+        "y": 240,
+        "wires": [
+            [
+                "6f8048c763db2aed"
+            ]
+        ]
+    },
+    {
+        "id": "ac8f78b9fd53299a",
+        "type": "change",
+        "z": "182d3223c1260b67",
+        "name": "Set ID",
+        "rules": [
+            {
+                "t": "set",
+                "p": "cameraID",
+                "pt": "flow",
+                "to": "id",
+                "tot": "msg",
+                "dc": true
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 470,
+        "y": 120,
+        "wires": [
+            [
+                "92c456d60e8743be"
+            ]
+        ]
+    },
+    {
+        "id": "6f8048c763db2aed",
+        "type": "change",
+        "z": "182d3223c1260b67",
+        "name": "Set numDetected",
+        "rules": [
+            {
+                "t": "set",
+                "p": "numDetected",
+                "pt": "flow",
+                "to": "numDetected",
+                "tot": "msg",
+                "dc": true
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 510,
+        "y": 280,
+        "wires": [
+            [
+                "a187cc7b1df4f721"
+            ]
+        ]
+    },
+    {
+        "id": "9756b6a5082dd65e",
+        "type": "inject",
+        "z": "182d3223c1260b67",
+        "name": "Camera ID 2",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "id",
+                "v": "2",
+                "vt": "num"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 270,
+        "y": 120,
+        "wires": [
+            [
+                "ac8f78b9fd53299a"
+            ]
+        ]
+    },
+    {
+        "id": "e1dc323e0654a184",
+        "type": "inject",
+        "z": "182d3223c1260b67",
+        "name": "Camera ID 3",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "id",
+                "v": "3",
+                "vt": "num"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 270,
+        "y": 160,
+        "wires": [
+            [
+                "ac8f78b9fd53299a"
+            ]
+        ]
+    },
+    {
+        "id": "92c456d60e8743be",
+        "type": "debug",
+        "z": "182d3223c1260b67",
+        "name": "ID Debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "id",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "c5f28438004d18d5",
+        "type": "inject",
+        "z": "182d3223c1260b67",
+        "name": "numDetected 2",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "numDetected",
+                "v": "2",
+                "vt": "num"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 280,
+        "y": 280,
+        "wires": [
+            [
+                "6f8048c763db2aed"
+            ]
+        ]
+    },
+    {
+        "id": "558b154121b1be90",
+        "type": "inject",
+        "z": "182d3223c1260b67",
+        "name": "numDetected 3",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "numDetected",
+                "v": "3",
+                "vt": "num"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 280,
+        "y": 320,
+        "wires": [
+            [
+                "6f8048c763db2aed"
+            ]
+        ]
+    },
+    {
+        "id": "a187cc7b1df4f721",
+        "type": "debug",
+        "z": "182d3223c1260b67",
+        "name": "numDetected",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "numDetected",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "94069236aba25289",
+        "type": "debug",
+        "z": "182d3223c1260b67",
+        "name": "variables",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "params",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 420,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "113d021c60870a78",
+        "type": "sqlite",
+        "z": "182d3223c1260b67",
+        "mydb": "0342a0cdf5d7ca65",
+        "sqlquery": "fixed",
+        "sql": "UPDATE Cameras SET numDetected = 5 WHERE cameraID = 1;",
+        "name": "Update camera numDetected",
+        "x": 710,
+        "y": 520,
+        "wires": [
+            []
+        ]
     }
 ]
