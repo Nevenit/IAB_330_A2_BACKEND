@@ -428,6 +428,88 @@
         ]
     },
     {
+        "id": "d2cb1dc351d65b04",
+        "type": "function",
+        "z": "182d3223c1260b67",
+        "name": "Generate array",
+        "func": "function getRandomFloat(min, max, decimals) {\n    return (Math.random() * (max - min) + min).toFixed(decimals);\n}\n\nlet cameraResolution = 8;\nlet cameraArray = [];\n\nfor (let y = 0; y < cameraResolution; y++) {\n    let row = [];\n    for (let x = 0; x < cameraResolution; y++) {\n        row.push(getRandomFloat(21.0, 22.0, 1));\n    }\n    cameraArray.push(row);\n}\nmsg.array = cameraArray;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 700,
+        "wires": [
+            [
+                "7905fb5c62d489a7"
+            ]
+        ]
+    },
+    {
+        "id": "7905fb5c62d489a7",
+        "type": "debug",
+        "z": "182d3223c1260b67",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "array",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 500,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "234b8858cc754af8",
+        "type": "inject",
+        "z": "182d3223c1260b67",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 700,
+        "wires": [
+            [
+                "d2cb1dc351d65b04",
+                "35693090c3f9ab22"
+            ]
+        ]
+    },
+    {
+        "id": "35693090c3f9ab22",
+        "type": "debug",
+        "z": "182d3223c1260b67",
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 280,
+        "y": 760,
+        "wires": []
+    },
+    {
         "id": "3690872c15f9a63c",
         "type": "sqlite",
         "z": "5f48f9abaf283188",
@@ -604,8 +686,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 670,
-        "y": 320,
+        "x": 690,
+        "y": 340,
         "wires": [
             []
         ]
