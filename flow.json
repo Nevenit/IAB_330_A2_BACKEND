@@ -16,14 +16,6 @@
         "env": []
     },
     {
-        "id": "f842624d5e0544e8",
-        "type": "tab",
-        "label": "Flow 2",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
         "id": "5f48f9abaf283188",
         "type": "tab",
         "label": "RFID Flow",
