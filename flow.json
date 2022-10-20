@@ -24,9 +24,23 @@
         "env": []
     },
     {
+        "id": "5f48f9abaf283188",
+        "type": "tab",
+        "label": "RFID Flow",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "0342a0cdf5d7ca65",
         "type": "sqlitedb",
         "db": "/data/database.db",
+        "mode": "RWC"
+    },
+    {
+        "id": "367ecc55a7054ddf",
+        "type": "sqlitedb",
+        "db": "/data/iotsolution.db",
         "mode": "RWC"
     },
     {
@@ -420,5 +434,331 @@
         "wires": [
             []
         ]
+    },
+    {
+        "id": "3690872c15f9a63c",
+        "type": "sqlite",
+        "z": "5f48f9abaf283188",
+        "mydb": "367ecc55a7054ddf",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "iot DB",
+        "x": 1170,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "031274933e5da9a4",
+        "type": "function",
+        "z": "5f48f9abaf283188",
+        "name": "Create Update Query",
+        "func": "if (msg.topic === \"\")\n{\n    msg.topic = 0;\n}\nvar statement = \"UPDATE RFIDList SET roomID = \" + msg.topic + \" WHERE RFID = \\\"\" + msg.payload + \"\\\"\";\nvar newmsg = {topic: statement};\nreturn newmsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 840,
+        "y": 180,
+        "wires": [
+            [
+                "be0bb92a267f9327",
+                "3690872c15f9a63c"
+            ]
+        ]
+    },
+    {
+        "id": "be0bb92a267f9327",
+        "type": "debug",
+        "z": "5f48f9abaf283188",
+        "name": "debug 2",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 860,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "c8314966f143b3f7",
+        "type": "inject",
+        "z": "5f48f9abaf283188",
+        "name": "RFID Scanner",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "v": "roomnum",
+                "vt": "flow"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "rfid",
+        "payloadType": "flow",
+        "x": 510,
+        "y": 180,
+        "wires": [
+            [
+                "031274933e5da9a4",
+                "2346d3bf91b09bfe"
+            ]
+        ]
+    },
+    {
+        "id": "ef0baea360079b49",
+        "type": "inject",
+        "z": "5f48f9abaf283188",
+        "name": "Room 1",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1",
+        "payloadType": "str",
+        "x": 490,
+        "y": 260,
+        "wires": [
+            [
+                "63c4f702d66878ce"
+            ]
+        ]
+    },
+    {
+        "id": "bc211187d06ccc72",
+        "type": "inject",
+        "z": "5f48f9abaf283188",
+        "name": "Room 2",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "2",
+        "payloadType": "str",
+        "x": 490,
+        "y": 320,
+        "wires": [
+            [
+                "63c4f702d66878ce"
+            ]
+        ]
+    },
+    {
+        "id": "84190ae1ca48da69",
+        "type": "inject",
+        "z": "5f48f9abaf283188",
+        "name": "Room 3",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "3",
+        "payloadType": "str",
+        "x": 490,
+        "y": 380,
+        "wires": [
+            [
+                "63c4f702d66878ce"
+            ]
+        ]
+    },
+    {
+        "id": "63c4f702d66878ce",
+        "type": "change",
+        "z": "5f48f9abaf283188",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "roomnum",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg",
+                "dc": true
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 670,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0b35accc602aa3fe",
+        "type": "inject",
+        "z": "5f48f9abaf283188",
+        "name": "c65e3be8-849c-46f0-9906-d7df37a4d9fc",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "c65e3be8-849c-46f0-9906-d7df37a4d9fc",
+        "payloadType": "str",
+        "x": 600,
+        "y": 580,
+        "wires": [
+            [
+                "e650f823e6fd72c9"
+            ]
+        ]
+    },
+    {
+        "id": "e859083f0e35025e",
+        "type": "inject",
+        "z": "5f48f9abaf283188",
+        "name": "51b304c6-ceb2-404b-b576-5bec8cc4008a",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "51b304c6-ceb2-404b-b576-5bec8cc4008a",
+        "payloadType": "str",
+        "x": 600,
+        "y": 640,
+        "wires": [
+            [
+                "e650f823e6fd72c9"
+            ]
+        ]
+    },
+    {
+        "id": "5fb939e2063f6a7b",
+        "type": "inject",
+        "z": "5f48f9abaf283188",
+        "name": "4d6a4996-0373-4539-b05c-7c93a056a6a5",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "4d6a4996-0373-4539-b05c-7c93a056a6a5",
+        "payloadType": "str",
+        "x": 600,
+        "y": 700,
+        "wires": [
+            [
+                "e650f823e6fd72c9"
+            ]
+        ]
+    },
+    {
+        "id": "e650f823e6fd72c9",
+        "type": "change",
+        "z": "5f48f9abaf283188",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "rfid",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg",
+                "dc": true
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 890,
+        "y": 640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f542c63fb91ea041",
+        "type": "inject",
+        "z": "5f48f9abaf283188",
+        "name": "No Room",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "str",
+        "x": 480,
+        "y": 440,
+        "wires": [
+            [
+                "63c4f702d66878ce"
+            ]
+        ]
+    },
+    {
+        "id": "2346d3bf91b09bfe",
+        "type": "debug",
+        "z": "5f48f9abaf283188",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "topic",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 80,
+        "wires": []
     }
 ]
