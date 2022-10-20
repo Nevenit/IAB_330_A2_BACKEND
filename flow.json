@@ -432,7 +432,7 @@
         "type": "function",
         "z": "182d3223c1260b67",
         "name": "Generate array",
-        "func": "function getRandomFloat(min, max, decimals) {\n    return (Math.random() * (max - min) + min).toFixed(decimals);\n}\n\nlet cameraResolution = 8;\nlet cameraArray = [];\n\nfor (let y = 0; y < cameraResolution; y++) {\n    let row = [];\n    for (let x = 0; x < cameraResolution; y++) {\n        row.push(getRandomFloat(21.0, 22.0, 1));\n    }\n    cameraArray.push(row);\n}\nmsg.array = cameraArray;\nreturn msg;",
+        "func": "function getRandomFloat(min, max, decimals) {\n    return (Math.random() * (max - min) + min).toFixed(decimals);\n}\n\nlet cameraResolution = 8;\nlet cameraArray = [];\n\n//Fill the array with random values within small range\n//to simulate noise \nlet debug = \"\";\nfor (let y = 0; y < cameraResolution; y++) {\n    let row = [];\n    for (let x = 0; x < cameraResolution; x++) {\n        let value = getRandomFloat(21.0, 22.0, 1);\n        row.push(value);\n        if (value > 21.5) {\n            debug += \"o\";\n        } else {\n            debug += \"x\";\n        }\n    }\n    cameraArray.push(row);\n    debug += \"\\n\";\n}\nmsg.debug = debug;\nmsg.array = cameraArray;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -442,7 +442,8 @@
         "y": 700,
         "wires": [
             [
-                "7905fb5c62d489a7"
+                "7905fb5c62d489a7",
+                "bb583f90f1d184a8"
             ]
         ]
     },
@@ -471,10 +472,6 @@
         "props": [
             {
                 "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
             }
         ],
         "repeat": "",
@@ -502,10 +499,28 @@
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
+        "complete": "payload",
+        "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 280,
+        "x": 300,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "bb583f90f1d184a8",
+        "type": "debug",
+        "z": "182d3223c1260b67",
+        "name": "debug 6",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "debug",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 500,
         "y": 760,
         "wires": []
     },
