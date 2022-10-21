@@ -24,6 +24,14 @@
         "env": []
     },
     {
+        "id": "dd6e626e5df41466",
+        "type": "tab",
+        "label": "Machine Flow",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "0342a0cdf5d7ca65",
         "type": "sqlitedb",
         "db": "/data/database.db",
@@ -848,6 +856,369 @@
         "statusType": "auto",
         "x": 720,
         "y": 100,
+        "wires": []
+    },
+    {
+        "id": "e10ba1e868967fb1",
+        "type": "sqlite",
+        "z": "dd6e626e5df41466",
+        "mydb": "367ecc55a7054ddf",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "iot DB",
+        "x": 1230,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8da816452cc64d71",
+        "type": "function",
+        "z": "dd6e626e5df41466",
+        "name": "Create Update Query",
+        "func": "if (msg.topic === \"\")\n{\n    msg.topic = 0;\n}\nvar statement = \"UPDATE Machines SET Status = \" + msg.payload + \" WHERE MachineID = \\\"\" + msg.topic + \"\\\"\";\nvar newmsg = {topic: statement};\nreturn newmsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 900,
+        "y": 220,
+        "wires": [
+            [
+                "45844fc35a75e213",
+                "e10ba1e868967fb1"
+            ]
+        ]
+    },
+    {
+        "id": "45844fc35a75e213",
+        "type": "debug",
+        "z": "dd6e626e5df41466",
+        "name": "debug 7",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 920,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "62cacab11064ba77",
+        "type": "inject",
+        "z": "dd6e626e5df41466",
+        "name": "Energy Monitor",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "v": "machineid",
+                "vt": "flow"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "machineenergy",
+        "payloadType": "flow",
+        "x": 340,
+        "y": 220,
+        "wires": [
+            [
+                "9508624bb65ef1fb",
+                "2810d21bd05d7139"
+            ]
+        ]
+    },
+    {
+        "id": "cc647040fa647669",
+        "type": "inject",
+        "z": "dd6e626e5df41466",
+        "name": "0 Watts",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 310,
+        "y": 300,
+        "wires": [
+            [
+                "f79670897e835242"
+            ]
+        ]
+    },
+    {
+        "id": "49f5377c869cf05e",
+        "type": "inject",
+        "z": "dd6e626e5df41466",
+        "name": "100 Watts",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "100",
+        "payloadType": "num",
+        "x": 300,
+        "y": 360,
+        "wires": [
+            [
+                "f79670897e835242"
+            ]
+        ]
+    },
+    {
+        "id": "18294fb6d6194c27",
+        "type": "inject",
+        "z": "dd6e626e5df41466",
+        "name": "200 Watts",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "200",
+        "payloadType": "num",
+        "x": 300,
+        "y": 420,
+        "wires": [
+            [
+                "f79670897e835242"
+            ]
+        ]
+    },
+    {
+        "id": "f79670897e835242",
+        "type": "change",
+        "z": "dd6e626e5df41466",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "machineenergy",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg",
+                "dc": true
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 530,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "195f79d5d1c506d3",
+        "type": "inject",
+        "z": "dd6e626e5df41466",
+        "name": "Machine 1",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1",
+        "payloadType": "str",
+        "x": 320,
+        "y": 620,
+        "wires": [
+            [
+                "2dea339db1c46c28"
+            ]
+        ]
+    },
+    {
+        "id": "3e09fa03bdb607be",
+        "type": "inject",
+        "z": "dd6e626e5df41466",
+        "name": "Machine 2",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "2",
+        "payloadType": "str",
+        "x": 320,
+        "y": 680,
+        "wires": [
+            [
+                "2dea339db1c46c28"
+            ]
+        ]
+    },
+    {
+        "id": "205f5959a190718c",
+        "type": "inject",
+        "z": "dd6e626e5df41466",
+        "name": "Machine 3",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "3",
+        "payloadType": "str",
+        "x": 320,
+        "y": 740,
+        "wires": [
+            [
+                "2dea339db1c46c28"
+            ]
+        ]
+    },
+    {
+        "id": "2dea339db1c46c28",
+        "type": "change",
+        "z": "dd6e626e5df41466",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "machineid",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg",
+                "dc": true
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 730,
+        "y": 680,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "94d5c1936443d8da",
+        "type": "inject",
+        "z": "dd6e626e5df41466",
+        "name": "300 Watts",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "300",
+        "payloadType": "num",
+        "x": 300,
+        "y": 480,
+        "wires": [
+            [
+                "f79670897e835242"
+            ]
+        ]
+    },
+    {
+        "id": "9508624bb65ef1fb",
+        "type": "debug",
+        "z": "dd6e626e5df41466",
+        "name": "debug 8",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 540,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "2810d21bd05d7139",
+        "type": "function",
+        "z": "dd6e626e5df41466",
+        "name": "Parse Energy Rating",
+        "func": "var energy = msg.payload;\nvar status = 0;\nif (energy >= 150)\n{\n    status = 1\n}\nvar newmsg = { topic: msg.topic, payload: status };\nreturn newmsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 220,
+        "wires": [
+            [
+                "968e95bbf2d1245d",
+                "8da816452cc64d71"
+            ]
+        ]
+    },
+    {
+        "id": "968e95bbf2d1245d",
+        "type": "debug",
+        "z": "dd6e626e5df41466",
+        "name": "debug 9",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 800,
+        "y": 140,
         "wires": []
     }
 ]
