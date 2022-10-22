@@ -16,7 +16,7 @@
         "env": []
     },
     {
-        "id": "5f48f9abaf283188",
+        "id": "4515619534d06bc2",
         "type": "tab",
         "label": "RFID Flow",
         "disabled": false,
@@ -24,7 +24,7 @@
         "env": []
     },
     {
-        "id": "dd6e626e5df41466",
+        "id": "88cb21596959a18c",
         "type": "tab",
         "label": "Machine Flow",
         "disabled": false,
@@ -635,9 +635,9 @@
         ]
     },
     {
-        "id": "3690872c15f9a63c",
+        "id": "c43f89f7600d2f1e",
         "type": "sqlite",
-        "z": "5f48f9abaf283188",
+        "z": "4515619534d06bc2",
         "mydb": "367ecc55a7054ddf",
         "sqlquery": "msg.topic",
         "sql": "",
@@ -649,9 +649,9 @@
         ]
     },
     {
-        "id": "031274933e5da9a4",
+        "id": "7b1672d3b88d5d2a",
         "type": "function",
-        "z": "5f48f9abaf283188",
+        "z": "4515619534d06bc2",
         "name": "Create Update Query",
         "func": "if (msg.topic === \"\")\n{\n    msg.topic = 0;\n}\nvar statement = \"UPDATE RFIDList SET roomID = \" + msg.topic + \" WHERE RFID = \\\"\" + msg.payload + \"\\\"\";\nvar newmsg = {topic: statement};\nreturn newmsg;",
         "outputs": 1,
@@ -663,15 +663,15 @@
         "y": 180,
         "wires": [
             [
-                "be0bb92a267f9327",
-                "3690872c15f9a63c"
+                "fdb4dd410c1c0d4a",
+                "c43f89f7600d2f1e"
             ]
         ]
     },
     {
-        "id": "be0bb92a267f9327",
+        "id": "fdb4dd410c1c0d4a",
         "type": "debug",
-        "z": "5f48f9abaf283188",
+        "z": "4515619534d06bc2",
         "name": "debug 2",
         "active": false,
         "tosidebar": true,
@@ -686,9 +686,9 @@
         "wires": []
     },
     {
-        "id": "c8314966f143b3f7",
+        "id": "3355ca38c8eecd4f",
         "type": "inject",
-        "z": "5f48f9abaf283188",
+        "z": "4515619534d06bc2",
         "name": "RFID Scanner",
         "props": [
             {
@@ -716,14 +716,15 @@
         "y": 180,
         "wires": [
             [
-                "031274933e5da9a4"
+                "7b1672d3b88d5d2a",
+                "2bbf939cd0e0b655"
             ]
         ]
     },
     {
-        "id": "ef0baea360079b49",
+        "id": "5aa27163bb4715e0",
         "type": "inject",
-        "z": "5f48f9abaf283188",
+        "z": "4515619534d06bc2",
         "name": "Room 1",
         "props": [
             {
@@ -741,14 +742,14 @@
         "y": 260,
         "wires": [
             [
-                "11a69c770e94b775"
+                "53a97c522c1ff629"
             ]
         ]
     },
     {
-        "id": "bc211187d06ccc72",
+        "id": "9c16ddaf4a148b49",
         "type": "inject",
-        "z": "5f48f9abaf283188",
+        "z": "4515619534d06bc2",
         "name": "Room 2",
         "props": [
             {
@@ -766,14 +767,14 @@
         "y": 320,
         "wires": [
             [
-                "11a69c770e94b775"
+                "53a97c522c1ff629"
             ]
         ]
     },
     {
-        "id": "84190ae1ca48da69",
+        "id": "2f18a790f421174c",
         "type": "inject",
-        "z": "5f48f9abaf283188",
+        "z": "4515619534d06bc2",
         "name": "Room 3",
         "props": [
             {
@@ -791,14 +792,14 @@
         "y": 380,
         "wires": [
             [
-                "11a69c770e94b775"
+                "53a97c522c1ff629"
             ]
         ]
     },
     {
-        "id": "0b35accc602aa3fe",
+        "id": "10fc60fa3fa9dda7",
         "type": "inject",
-        "z": "5f48f9abaf283188",
+        "z": "4515619534d06bc2",
         "name": "c65e3be8-849c-46f0-9906-d7df37a4d9fc",
         "props": [
             {
@@ -816,14 +817,14 @@
         "y": 580,
         "wires": [
             [
-                "e650f823e6fd72c9"
+                "4c768ad9ebf6ed23"
             ]
         ]
     },
     {
-        "id": "e859083f0e35025e",
+        "id": "fe1a488aad1f6f43",
         "type": "inject",
-        "z": "5f48f9abaf283188",
+        "z": "4515619534d06bc2",
         "name": "51b304c6-ceb2-404b-b576-5bec8cc4008a",
         "props": [
             {
@@ -841,14 +842,14 @@
         "y": 640,
         "wires": [
             [
-                "e650f823e6fd72c9"
+                "4c768ad9ebf6ed23"
             ]
         ]
     },
     {
-        "id": "5fb939e2063f6a7b",
+        "id": "72f2b293aea614c4",
         "type": "inject",
-        "z": "5f48f9abaf283188",
+        "z": "4515619534d06bc2",
         "name": "4d6a4996-0373-4539-b05c-7c93a056a6a5",
         "props": [
             {
@@ -866,14 +867,14 @@
         "y": 700,
         "wires": [
             [
-                "e650f823e6fd72c9"
+                "4c768ad9ebf6ed23"
             ]
         ]
     },
     {
-        "id": "e650f823e6fd72c9",
+        "id": "4c768ad9ebf6ed23",
         "type": "change",
-        "z": "5f48f9abaf283188",
+        "z": "4515619534d06bc2",
         "name": "",
         "rules": [
             {
@@ -897,9 +898,9 @@
         ]
     },
     {
-        "id": "f542c63fb91ea041",
+        "id": "48a97aa0dace137e",
         "type": "inject",
-        "z": "5f48f9abaf283188",
+        "z": "4515619534d06bc2",
         "name": "No Room",
         "props": [
             {
@@ -917,14 +918,14 @@
         "y": 440,
         "wires": [
             [
-                "11a69c770e94b775"
+                "53a97c522c1ff629"
             ]
         ]
     },
     {
-        "id": "f7739223468e4b8c",
+        "id": "fe6f3bbc3644190b",
         "type": "function",
-        "z": "5f48f9abaf283188",
+        "z": "4515619534d06bc2",
         "name": "Insert RFID History Data",
         "func": "if (msg.topic === \"\") \n{\n    var prevroomnum = flow.get(\"prevroomnum\");\n    var statement = \"INSERT INTO RFIDHistory(RFID, Timestamp, RoomID, EventType) VALUES (\\\"\" + msg.payload + \"\\\", \\\"\" + msg.timestampformat + \"\\\", \" + prevroomnum + \", 0)\";\n}\nelse\n{\n    var statement = \"INSERT INTO RFIDHistory(RFID, Timestamp, RoomID, EventType) VALUES (\\\"\" + msg.payload + \"\\\", \\\"\" + msg.timestampformat + \"\\\", \" + msg.topic + \", 1)\";\n}\nvar newmsg = { topic: statement };\nreturn newmsg;",
         "outputs": 1,
@@ -936,15 +937,15 @@
         "y": 120,
         "wires": [
             [
-                "833114b0ec3a4394",
-                "3690872c15f9a63c"
+                "658aa10efb6a88c1",
+                "c43f89f7600d2f1e"
             ]
         ]
     },
     {
-        "id": "833114b0ec3a4394",
+        "id": "658aa10efb6a88c1",
         "type": "debug",
-        "z": "5f48f9abaf283188",
+        "z": "4515619534d06bc2",
         "name": "debug 10",
         "active": false,
         "tosidebar": true,
@@ -959,9 +960,9 @@
         "wires": []
     },
     {
-        "id": "11a69c770e94b775",
+        "id": "53a97c522c1ff629",
         "type": "function",
-        "z": "5f48f9abaf283188",
+        "z": "4515619534d06bc2",
         "name": "set flow.roomnum",
         "func": "if (msg.payload === \"\")\n{\n    flow.set(\"prevroomnum\", flow.get(\"roomnum\"));\n}\nflow.set(\"roomnum\", msg.payload);",
         "outputs": 1,
@@ -976,9 +977,9 @@
         ]
     },
     {
-        "id": "c728a0d3be08107c",
+        "id": "2bbf939cd0e0b655",
         "type": "moment",
-        "z": "5f48f9abaf283188",
+        "z": "4515619534d06bc2",
         "name": "",
         "topic": "",
         "input": "timestamp",
@@ -996,28 +997,46 @@
         "y": 120,
         "wires": [
             [
-                "f7739223468e4b8c"
+                "fe6f3bbc3644190b",
+                "01edf049c1fcaf34"
             ]
         ]
     },
     {
-        "id": "e10ba1e868967fb1",
+        "id": "01edf049c1fcaf34",
+        "type": "debug",
+        "z": "4515619534d06bc2",
+        "name": "debug 11",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "timestampformat",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1000,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "e2a25e403d3b6d75",
         "type": "sqlite",
-        "z": "dd6e626e5df41466",
+        "z": "88cb21596959a18c",
         "mydb": "367ecc55a7054ddf",
         "sqlquery": "msg.topic",
         "sql": "",
         "name": "iot DB",
-        "x": 1230,
+        "x": 1450,
         "y": 220,
         "wires": [
             []
         ]
     },
     {
-        "id": "8da816452cc64d71",
+        "id": "4959f7447da67718",
         "type": "function",
-        "z": "dd6e626e5df41466",
+        "z": "88cb21596959a18c",
         "name": "Create Update Query",
         "func": "if (msg.topic === \"\")\n{\n    msg.topic = 0;\n}\nvar statement = \"UPDATE Machines SET Status = \" + msg.payload + \" WHERE MachineID = \\\"\" + msg.topic + \"\\\"\";\nvar newmsg = {topic: statement};\nreturn newmsg;",
         "outputs": 1,
@@ -1029,15 +1048,15 @@
         "y": 220,
         "wires": [
             [
-                "45844fc35a75e213",
-                "e10ba1e868967fb1"
+                "0524eaeb7660bc6e",
+                "e2a25e403d3b6d75"
             ]
         ]
     },
     {
-        "id": "45844fc35a75e213",
+        "id": "0524eaeb7660bc6e",
         "type": "debug",
-        "z": "dd6e626e5df41466",
+        "z": "88cb21596959a18c",
         "name": "debug 7",
         "active": false,
         "tosidebar": true,
@@ -1052,9 +1071,9 @@
         "wires": []
     },
     {
-        "id": "62cacab11064ba77",
+        "id": "fe96a0ab883f716d",
         "type": "inject",
-        "z": "dd6e626e5df41466",
+        "z": "88cb21596959a18c",
         "name": "Energy Monitor",
         "props": [
             {
@@ -1064,6 +1083,11 @@
                 "p": "topic",
                 "v": "machineid",
                 "vt": "flow"
+            },
+            {
+                "p": "timestamp",
+                "v": "",
+                "vt": "date"
             }
         ],
         "repeat": "",
@@ -1077,15 +1101,15 @@
         "y": 220,
         "wires": [
             [
-                "9508624bb65ef1fb",
-                "2810d21bd05d7139"
+                "80e11616f71ae045",
+                "2a91b90e752e7606"
             ]
         ]
     },
     {
-        "id": "cc647040fa647669",
+        "id": "f3b4ce8e8d116cd8",
         "type": "inject",
-        "z": "dd6e626e5df41466",
+        "z": "88cb21596959a18c",
         "name": "0 Watts",
         "props": [
             {
@@ -1103,14 +1127,14 @@
         "y": 300,
         "wires": [
             [
-                "f79670897e835242"
+                "fc15fbb575a32525"
             ]
         ]
     },
     {
-        "id": "49f5377c869cf05e",
+        "id": "fc1fef20c115eb0c",
         "type": "inject",
-        "z": "dd6e626e5df41466",
+        "z": "88cb21596959a18c",
         "name": "100 Watts",
         "props": [
             {
@@ -1128,14 +1152,14 @@
         "y": 360,
         "wires": [
             [
-                "f79670897e835242"
+                "fc15fbb575a32525"
             ]
         ]
     },
     {
-        "id": "18294fb6d6194c27",
+        "id": "42d908f5e531f3e7",
         "type": "inject",
-        "z": "dd6e626e5df41466",
+        "z": "88cb21596959a18c",
         "name": "200 Watts",
         "props": [
             {
@@ -1153,14 +1177,14 @@
         "y": 420,
         "wires": [
             [
-                "f79670897e835242"
+                "fc15fbb575a32525"
             ]
         ]
     },
     {
-        "id": "f79670897e835242",
+        "id": "fc15fbb575a32525",
         "type": "change",
-        "z": "dd6e626e5df41466",
+        "z": "88cb21596959a18c",
         "name": "",
         "rules": [
             {
@@ -1184,9 +1208,9 @@
         ]
     },
     {
-        "id": "195f79d5d1c506d3",
+        "id": "c41f742b374b36f7",
         "type": "inject",
-        "z": "dd6e626e5df41466",
+        "z": "88cb21596959a18c",
         "name": "Machine 1",
         "props": [
             {
@@ -1204,14 +1228,14 @@
         "y": 620,
         "wires": [
             [
-                "2dea339db1c46c28"
+                "81b35c989e8a4c8b"
             ]
         ]
     },
     {
-        "id": "3e09fa03bdb607be",
+        "id": "a60a44b55023e157",
         "type": "inject",
-        "z": "dd6e626e5df41466",
+        "z": "88cb21596959a18c",
         "name": "Machine 2",
         "props": [
             {
@@ -1229,14 +1253,14 @@
         "y": 680,
         "wires": [
             [
-                "2dea339db1c46c28"
+                "81b35c989e8a4c8b"
             ]
         ]
     },
     {
-        "id": "205f5959a190718c",
+        "id": "01a0a96835cace4d",
         "type": "inject",
-        "z": "dd6e626e5df41466",
+        "z": "88cb21596959a18c",
         "name": "Machine 3",
         "props": [
             {
@@ -1254,14 +1278,14 @@
         "y": 740,
         "wires": [
             [
-                "2dea339db1c46c28"
+                "81b35c989e8a4c8b"
             ]
         ]
     },
     {
-        "id": "2dea339db1c46c28",
+        "id": "81b35c989e8a4c8b",
         "type": "change",
-        "z": "dd6e626e5df41466",
+        "z": "88cb21596959a18c",
         "name": "",
         "rules": [
             {
@@ -1285,9 +1309,9 @@
         ]
     },
     {
-        "id": "94d5c1936443d8da",
+        "id": "1841455f9635e011",
         "type": "inject",
-        "z": "dd6e626e5df41466",
+        "z": "88cb21596959a18c",
         "name": "300 Watts",
         "props": [
             {
@@ -1305,14 +1329,14 @@
         "y": 480,
         "wires": [
             [
-                "f79670897e835242"
+                "fc15fbb575a32525"
             ]
         ]
     },
     {
-        "id": "9508624bb65ef1fb",
+        "id": "80e11616f71ae045",
         "type": "debug",
-        "z": "dd6e626e5df41466",
+        "z": "88cb21596959a18c",
         "name": "debug 8",
         "active": false,
         "tosidebar": true,
@@ -1323,13 +1347,13 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 540,
-        "y": 140,
+        "y": 280,
         "wires": []
     },
     {
-        "id": "2810d21bd05d7139",
+        "id": "2a91b90e752e7606",
         "type": "function",
-        "z": "dd6e626e5df41466",
+        "z": "88cb21596959a18c",
         "name": "Parse Energy Rating",
         "func": "var energy = msg.payload;\nvar status = 0;\nif (energy >= 150)\n{\n    status = 1\n}\nvar newmsg = { topic: msg.topic, payload: status };\nreturn newmsg;",
         "outputs": 1,
@@ -1341,15 +1365,16 @@
         "y": 220,
         "wires": [
             [
-                "968e95bbf2d1245d",
-                "8da816452cc64d71"
+                "eda5c3320ca96d3f",
+                "4959f7447da67718",
+                "891248976fe35af6"
             ]
         ]
     },
     {
-        "id": "968e95bbf2d1245d",
+        "id": "eda5c3320ca96d3f",
         "type": "debug",
-        "z": "dd6e626e5df41466",
+        "z": "88cb21596959a18c",
         "name": "debug 9",
         "active": false,
         "tosidebar": true,
@@ -1359,8 +1384,52 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 800,
-        "y": 140,
+        "x": 740,
+        "y": 280,
         "wires": []
+    },
+    {
+        "id": "891248976fe35af6",
+        "type": "moment",
+        "z": "88cb21596959a18c",
+        "name": "",
+        "topic": "",
+        "input": "timestamp",
+        "inputType": "msg",
+        "inTz": "Australia/Brisbane",
+        "adjAmount": 0,
+        "adjType": "days",
+        "adjDir": "add",
+        "format": "",
+        "locale": "en-US",
+        "output": "timestampformat",
+        "outputType": "msg",
+        "outTz": "Australia/Brisbane",
+        "x": 880,
+        "y": 120,
+        "wires": [
+            [
+                "32be23b705b76386"
+            ]
+        ]
+    },
+    {
+        "id": "32be23b705b76386",
+        "type": "function",
+        "z": "88cb21596959a18c",
+        "name": "Insert Machine History Data",
+        "func": "var statement = \"INSERT INTO MachinesHistory(MachineID, Timestamp, State) VALUES (\" + msg.topic + \", \\\"\" + msg.timestampformat + \"\\\", \" + msg.payload + \")\";\nvar newmsg = { topic: statement };\nreturn newmsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1220,
+        "y": 120,
+        "wires": [
+            [
+                "e2a25e403d3b6d75"
+            ]
+        ]
     }
 ]
