@@ -606,6 +606,38 @@
         ]
     },
     {
+        "id": "c46fe0b85add5126",
+        "type": "catch",
+        "z": "182d3223c1260b67",
+        "name": "Catch all errors",
+        "scope": null,
+        "uncaught": false,
+        "x": 300,
+        "y": 880,
+        "wires": [
+            [
+                "aa8c4feded2cb1a1"
+            ]
+        ]
+    },
+    {
+        "id": "aa8c4feded2cb1a1",
+        "type": "debug",
+        "z": "182d3223c1260b67",
+        "name": "All errors",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 460,
+        "y": 880,
+        "wires": []
+    },
+    {
         "id": "3690872c15f9a63c",
         "type": "sqlite",
         "z": "5f48f9abaf283188",
@@ -687,8 +719,7 @@
         "y": 180,
         "wires": [
             [
-                "031274933e5da9a4",
-                "c728a0d3be08107c"
+                "031274933e5da9a4"
             ]
         ]
     },
@@ -914,31 +945,6 @@
         ]
     },
     {
-        "id": "c728a0d3be08107c",
-        "type": "moment",
-        "z": "5f48f9abaf283188",
-        "name": "",
-        "topic": "",
-        "input": "timestamp",
-        "inputType": "msg",
-        "inTz": "Australia/Brisbane",
-        "adjAmount": 0,
-        "adjType": "days",
-        "adjDir": "add",
-        "format": "",
-        "locale": "en-US",
-        "output": "timestampformat",
-        "outputType": "msg",
-        "outTz": "Australia/Brisbane",
-        "x": 780,
-        "y": 120,
-        "wires": [
-            [
-                "f7739223468e4b8c"
-            ]
-        ]
-    },
-    {
         "id": "833114b0ec3a4394",
         "type": "debug",
         "z": "5f48f9abaf283188",
@@ -970,6 +976,31 @@
         "y": 340,
         "wires": [
             []
+        ]
+    },
+    {
+        "id": "c728a0d3be08107c",
+        "type": "moment",
+        "z": "5f48f9abaf283188",
+        "name": "",
+        "topic": "",
+        "input": "timestamp",
+        "inputType": "msg",
+        "inTz": "Australia/Brisbane",
+        "adjAmount": 0,
+        "adjType": "days",
+        "adjDir": "add",
+        "format": "",
+        "locale": "en-US",
+        "output": "timestampformat",
+        "outputType": "msg",
+        "outTz": "Australia/Brisbane",
+        "x": 780,
+        "y": 120,
+        "wires": [
+            [
+                "f7739223468e4b8c"
+            ]
         ]
     },
     {
