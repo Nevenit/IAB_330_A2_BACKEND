@@ -526,14 +526,15 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 790,
+        "x": 770,
         "y": 640,
         "wires": [
             [
                 "1d0ffc65c97a15c3",
                 "bf061b52669fb35a",
                 "9d4d0c054e96a8a3",
-                "6e43bb6b516be8ed"
+                "6e43bb6b516be8ed",
+                "075ebfcf23998e77"
             ]
         ]
     },
@@ -550,7 +551,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 790,
+        "x": 770,
         "y": 680,
         "wires": []
     },
@@ -567,7 +568,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 770,
+        "x": 750,
         "y": 720,
         "wires": []
     },
@@ -584,7 +585,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 790,
+        "x": 770,
         "y": 760,
         "wires": []
     },
@@ -592,6 +593,7 @@
         "id": "6e43bb6b516be8ed",
         "type": "file",
         "z": "182d3223c1260b67",
+        "d": true,
         "name": "",
         "filename": "/data/output.txt",
         "filenameType": "str",
@@ -599,8 +601,8 @@
         "createDir": false,
         "overwriteFile": "true",
         "encoding": "none",
-        "x": 1100,
-        "y": 640,
+        "x": 1000,
+        "y": 700,
         "wires": [
             []
         ]
@@ -636,6 +638,43 @@
         "x": 460,
         "y": 880,
         "wires": []
+    },
+    {
+        "id": "f92ff7af120ef533",
+        "type": "comment",
+        "z": "182d3223c1260b67",
+        "name": "Simulate camera sensor",
+        "info": "",
+        "x": 570,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "ec795ae9b54afe1c",
+        "type": "comment",
+        "z": "182d3223c1260b67",
+        "name": "Node-red recieves data from sensor",
+        "info": "",
+        "x": 1080,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "075ebfcf23998e77",
+        "type": "function",
+        "z": "182d3223c1260b67",
+        "name": "Count heat sources",
+        "func": "var cameraArray = msg.array;\nvar cameraResolution = cameraArray.length;\n\nfor (let y = 0; y < cameraResolution; y++) {\n    for (let x = 0; x < cameraResolution; x++) {\n\n    }\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1360,
+        "y": 640,
+        "wires": [
+            []
+        ]
     },
     {
         "id": "3690872c15f9a63c",
