@@ -655,7 +655,7 @@
         "z": "182d3223c1260b67",
         "name": "Node-red recieves data from sensor",
         "info": "",
-        "x": 1080,
+        "x": 1100,
         "y": 600,
         "wires": []
     },
@@ -664,7 +664,7 @@
         "type": "function",
         "z": "182d3223c1260b67",
         "name": "Count heat sources",
-        "func": "var cameraArray = msg.array;\nvar cameraResolution = cameraArray.length;\n\nfor (let y = 0; y < cameraResolution; y++) {\n    for (let x = 0; x < cameraResolution; x++) {\n\n    }\n}\n\nreturn msg;",
+        "func": "var cameraArray = msg.array;\nvar cameraArrayMarked = cameraArray;\nvar cameraResolution = cameraArray.length;\n\nfunction getNeighbours(pos) {\n    let neighbourArray = [];\n    for (let y = pos[1] - 1; y <= pos[1] + 1; y++) {\n        for (let x = pos[0] - 1; x <= pos[0] + 1; x++) {\n            if ((x != pos[0] && y != pos[1]) && (x >= 0 && x <= cameraResolution) && (y >= 0 && y <= cameraResolution)) {\n                neighbourArray.push([y, x])\n            }\n        }\n    }\n    return neighbourArray;\n}\n\nfunction visitElement(pos) {\n    let marked = 0;\n    let isWithinRange = ((cameraArray[pos[0][pos[1]]] > 34) && (cameraArray[pos[0][pos[1]]] < 40));\n    let isMarked = cameraArrayMarked[pos[0],pos[1]] == 1;\n    if (isWithinRange && !isMarked) {\n        cameraArrayMarked[pos[0], pos[1]] = 1;\n        marked = 1;\n\n\n    }\n    return marked;\n}\n\n// Empty the visited array \nfor (let y = 0; y < cameraResolution; y++) {\n    for (let x = 0; x < cameraResolution; x++) {\n        cameraArrayMarked[y][x] = 0;\n    }\n}\n\n// Detect blobs\nlet peopleDetected = 0;\nfor (let y = 0; y < cameraResolution; y++) {\n    for (let x = 0; x < cameraResolution; x++) {\n        let result = visitElement(cameraArray[y][x]);\n        if (result > 0) {\n            peopleDetected++;\n        }\n    }\n}\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
