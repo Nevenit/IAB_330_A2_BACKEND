@@ -440,7 +440,7 @@
         "type": "function",
         "z": "182d3223c1260b67",
         "name": "Generate array",
-        "func": "function getRandomFloat(min, max, decimals) {\n    return (Math.random() * (max - min) + min).toFixed(decimals);\n}\n\n// The horizontal and vertical pixel count\nlet cameraResolution = 32;\n\nlet cameraArray = [];\n\n//Fill the array with random values within small range\n//to simulate noise. \nlet debug = \"This is just a visualisation of the random noise, not the actual values. \\n\";\nfor (let y = 0; y < cameraResolution; y++) {\n    let row = [];\n    for (let x = 0; x < cameraResolution; x++) {\n        let value = parseFloat(getRandomFloat(21.0, 22.0, 1));\n        row.push(value);\n        if (value > 21.5) {\n            debug += \" o\";\n        } else {\n            debug += \" x\";\n        }\n    }\n    cameraArray.push(row);\n    debug += \"\\n\";\n}\n\nmsg.debug = debug;\nmsg.array = cameraArray;\nreturn msg;",
+        "func": "function getRandomFloat(min, max, decimals) {\n    return (Math.random() * (max - min) + min).toFixed(decimals);\n}\n\n// The horizontal and vertical pixel count\nlet cameraResolution = 64;\n\nlet cameraArray = [];\n\n//Fill the array with random values within small range\n//to simulate noise. \nlet debug = \"This is just a visualisation of the random noise, not the actual values. \\n\";\nfor (let y = 0; y < cameraResolution; y++) {\n    let row = [];\n    for (let x = 0; x < cameraResolution; x++) {\n        let value = parseFloat(getRandomFloat(21.0, 22.0, 1));\n        row.push(value);\n        if (value > 21.5) {\n            debug += \" o\";\n        } else {\n            debug += \" x\";\n        }\n    }\n    cameraArray.push(row);\n    debug += \"\\n\";\n}\n\nmsg.debug = debug;\nmsg.array = cameraArray;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -520,7 +520,7 @@
         "type": "function",
         "z": "182d3223c1260b67",
         "name": "Add heat sources",
-        "func": "function getRandom(min, max) {\n    return Math.floor(Math.random() * (max - min)) + min;\n}\n/*\nfunction areOverlapping(pos1, pos2, size) {\n    return (Math.abs(pos1[0] - pos2[0]) < size * 2 + 1|| Math.abs(pos1[1] - pos2[1]) < size * 2 + 1);\n}\n\nfunction isPositionOverlappingExisting(pos, existing, size) {\n    for (let i = 0; i < existing.length; i++) {\n        if (areOverlapping(pos, existing[i], size)) {\n            return true;\n        }\n    }\n    return false;\n}\n*/\nfunction placeHeatSource(cameraArray, pos, size, temp) {\n    //node.warn(\"huh\");\n    for (let _y = pos[1] - size; _y <= pos[1] + size; _y++) {\n        //node.warn(\"thats gay\");\n        for (let _x = pos[0] - size; _x <= pos[0] + size; _x++) {\n            if (_x < 0 || _x >= cameraArray.length) {continue;}\n            if (_y < 0 || _y >= cameraArray.length) {continue;}\n            //node.warn(\"waht you mean\");\n            //node.warn(cameraArray);\n            //node.warn(pos);\n            //node.warn(size);\n            cameraArray[_x][_y] = temp - (Math.abs(pos[0] - _x) + Math.abs(pos[1] - _y));\n            //node.warn(\"umm\");\n        }\n    }\n    return cameraArray;\n}\n\n//This is a very lazy way of placing something in a unique position\n//its slow and inefficient, but its fast enough and works well for\n//this simulation\n/*\nfunction getUniquePosition(cameraArray, existing, size) {\n    //Try to fins a unique position 100000 times\n    //anything more than that would just take too long\n    for (let i = 0; i < 100000; i++) {\n        let x = getRandom(size, cameraArray.length - size);\n        let y = getRandom(size, cameraArray.length - size);\n        if (existing.length == 0) {\n            return [x, y];\n        }\n        else {\n            if (!isPositionOverlappingExisting([x, y], existing, size)) {\n                return [x, y];\n            }\n        }\n    }\n    node.warn(\"This didnt work, you cant fit that many heat sources in\")\n    return -1\n}\n*/\nfunction getAvaliablePositioin(cameraArray, existing, size) {\n    let avaliablePositons = [];\n    for (let y = 0; y < cameraArray.length; y++) {\n        for (let x = 0; x < cameraArray.length; x++) {\n            if (existing.length == 0) { return [getRandom(0, cameraArray.length), getRandom(0, cameraArray.length)]}\n            let doAdd = true;\n            //node.warn(\"1\");\n            //node.warn([x, y]);\n            for (let e = 0; e < existing.length; e++) {\n                //node.warn(existing[e]);\n                //node.warn(\"3\");\n                if (Math.abs(x - existing[e][0]) <= (size * 2 + 1)) {\n                    doAdd = false;\n                    break;\n                }\n                //node.warn(\"2\");\n                //node.warn(\"4\");\n                if (Math.abs(y - existing[e][1]) <= (size * 2 + 1)) {\n                    doAdd = false;\n                    break;\n                }\n                //node.warn(\"3\");\n                //node.warn(Math.abs(x - existing[e][0]));\n                //node.warn(Math.abs(y - existing[e][1]));\n                //node.warn(size);\n            }\n            if (doAdd) {\n                //node.warn(\"4\");\n                avaliablePositons.push([x, y]);\n                //node.warn(\"5\");\n            }\n            \n        }\n    }\n    //node.warn(avaliablePositons.length);\n    return avaliablePositons[getRandom(0, avaliablePositons.length)];\n}\n\nfunction getuniquePosition2(cameraArray, existing, size) {\n    //node.warn(\"1\");\n    let pos = getAvaliablePositioin(cameraArray, existing, size)\n    //node.warn(\"2\");\n   // node.warn(existing)\n    //node.warn(pos);\n    return pos;\n}\n\n\nlet cameraArray = msg.array;\n\n//The number of heat sources to add\nlet heatSourceCount = 4;\n\n//The temperature of the heatsources\nlet heatSourceTemperature = 36.6;\n\n//The size of the heat source in pixels to all sides \n// size 0 would make a 1x1 heatsource, 1 3x3, 2 5x5 and so on\nlet heatSourceSize = 1;\n\n\n//Stores the position of heatsources\nlet existingHeatSources = [];\n\n\nfor (let i = 0; i < heatSourceCount; i++) {\n    //node.warn(\"69\");\n    let pos = getuniquePosition2(cameraArray, existingHeatSources, heatSourceSize);\n    //node.warn(pos);\n    //node.warn(\"420\");\n    cameraArray = placeHeatSource(cameraArray, pos, heatSourceSize, heatSourceTemperature);\n    //node.warn(\"what\");\n    existingHeatSources.push(pos);\n}\n//node.warn(existingHeatSources);\nlet arrayString = \"\"\n\nfor (let y = 0; y < cameraArray.length; y++) {\n    for (let x = 0; x < cameraArray.length; x++) {\n        if (cameraArray[y][x] > 32) {\n            arrayString += \"1,\";\n        } else {\n            arrayString += \"0,\";\n        }\n        \n    }\n    arrayString += \"\\n\";\n}\n\nmsg.payload = arrayString;\nmsg.arrayString = arrayString;\nmsg.array = cameraArray;\nmsg.sources = existingHeatSources;\nreturn msg;",
+        "func": "function getRandom(min, max) {\n    return Math.floor(Math.random() * (max - min)) + min;\n}\n/*\nfunction areOverlapping(pos1, pos2, size) {\n    return (Math.abs(pos1[0] - pos2[0]) < size * 2 + 1|| Math.abs(pos1[1] - pos2[1]) < size * 2 + 1);\n}\n\nfunction isPositionOverlappingExisting(pos, existing, size) {\n    for (let i = 0; i < existing.length; i++) {\n        if (areOverlapping(pos, existing[i], size)) {\n            return true;\n        }\n    }\n    return false;\n}\n*/\nfunction placeHeatSource(cameraArray, pos, size, temp) {\n    //node.warn(\"huh\");\n    for (let _y = pos[1] - size; _y <= pos[1] + size; _y++) {\n        //node.warn(\"thats gay\");\n        for (let _x = pos[0] - size; _x <= pos[0] + size; _x++) {\n            if (_x < 0 || _x >= cameraArray.length) {continue;}\n            if (_y < 0 || _y >= cameraArray.length) {continue;}\n            //node.warn(\"waht you mean\");\n            //node.warn(cameraArray);\n            //node.warn(pos);\n            //node.warn(size);\n            cameraArray[_x][_y] = temp - (Math.abs(pos[0] - _x) + Math.abs(pos[1] - _y));\n            //node.warn(\"umm\");\n        }\n    }\n    return cameraArray;\n}\n\n//This is a very lazy way of placing something in a unique position\n//its slow and inefficient, but its fast enough and works well for\n//this simulation\n/*\nfunction getUniquePosition(cameraArray, existing, size) {\n    //Try to fins a unique position 100000 times\n    //anything more than that would just take too long\n    for (let i = 0; i < 100000; i++) {\n        let x = getRandom(size, cameraArray.length - size);\n        let y = getRandom(size, cameraArray.length - size);\n        if (existing.length == 0) {\n            return [x, y];\n        }\n        else {\n            if (!isPositionOverlappingExisting([x, y], existing, size)) {\n                return [x, y];\n            }\n        }\n    }\n    node.warn(\"This didnt work, you cant fit that many heat sources in\")\n    return -1\n}\n*/\nfunction getAvaliablePositioin(cameraArray, existing, size) {\n    let avaliablePositons = [];\n    for (let y = 0; y < cameraArray.length; y++) {\n        for (let x = 0; x < cameraArray.length; x++) {\n            if (existing.length == 0) { return [getRandom(0, cameraArray.length), getRandom(0, cameraArray.length)]}\n            let doAdd = true;\n            //node.warn(\"1\");\n            //node.warn([x, y]);\n            for (let e = 0; e < existing.length; e++) {\n                //node.warn(existing[e]);\n                //node.warn(\"3\");\n                if (Math.abs(x - existing[e][0]) <= (size * 2 + 1)) {\n                    doAdd = false;\n                    break;\n                }\n                //node.warn(\"2\");\n                //node.warn(\"4\");\n                if (Math.abs(y - existing[e][1]) <= (size * 2 + 1)) {\n                    doAdd = false;\n                    break;\n                }\n                //node.warn(\"3\");\n                //node.warn(Math.abs(x - existing[e][0]));\n                //node.warn(Math.abs(y - existing[e][1]));\n                //node.warn(size);\n            }\n            if (doAdd) {\n                //node.warn(\"4\");\n                avaliablePositons.push([x, y]);\n                //node.warn(\"5\");\n            }\n            \n        }\n    }\n    //node.warn(avaliablePositons.length);\n    return avaliablePositons[getRandom(0, avaliablePositons.length)];\n}\n\nfunction getuniquePosition2(cameraArray, existing, size) {\n    //node.warn(\"1\");\n    let pos = getAvaliablePositioin(cameraArray, existing, size)\n    //node.warn(\"2\");\n   // node.warn(existing)\n    //node.warn(pos);\n    return pos;\n}\n\n\nlet cameraArray = msg.array;\n\n//The number of heat sources to add\nlet heatSourceCount = flow.get(\"numDetected\");\n\n//The temperature of the heatsources\nlet heatSourceTemperature = 36.6;\n\n//The size of the heat source in pixels to all sides \n// size 0 would make a 1x1 heatsource, 1 3x3, 2 5x5 and so on\nlet heatSourceSize = 1;\n\n\n//Stores the position of heatsources\nlet existingHeatSources = [];\n\n\nfor (let i = 0; i < heatSourceCount; i++) {\n    //node.warn(\"69\");\n    let pos = getuniquePosition2(cameraArray, existingHeatSources, heatSourceSize);\n    //node.warn(pos);\n    //node.warn(\"420\");\n    cameraArray = placeHeatSource(cameraArray, pos, heatSourceSize, heatSourceTemperature);\n    //node.warn(\"what\");\n    existingHeatSources.push(pos);\n}\n//node.warn(existingHeatSources);\nlet arrayString = \"\"\n\nfor (let y = 0; y < cameraArray.length; y++) {\n    for (let x = 0; x < cameraArray.length; x++) {\n        if (cameraArray[y][x] > 32) {\n            arrayString += \"1,\";\n        } else {\n            arrayString += \"0,\";\n        }\n        \n    }\n    arrayString += \"\\n\";\n}\n\nmsg.payload = arrayString;\nmsg.arrayString = arrayString;\nmsg.array = cameraArray;\nmsg.sources = existingHeatSources;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -600,8 +600,8 @@
         "createDir": false,
         "overwriteFile": "true",
         "encoding": "none",
-        "x": 1000,
-        "y": 700,
+        "x": 980,
+        "y": 720,
         "wires": [
             []
         ]
@@ -612,8 +612,8 @@
         "z": "182d3223c1260b67",
         "name": "Simulate camera sensor",
         "info": "",
-        "x": 570,
-        "y": 580,
+        "x": 550,
+        "y": 600,
         "wires": []
     },
     {
@@ -622,8 +622,8 @@
         "z": "182d3223c1260b67",
         "name": "Node-red recieves data from sensor",
         "info": "",
-        "x": 1100,
-        "y": 580,
+        "x": 1120,
+        "y": 600,
         "wires": []
     },
     {
@@ -639,8 +639,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1630,
-        "y": 640,
+        "x": 1350,
+        "y": 720,
         "wires": []
     },
     {
@@ -659,7 +659,8 @@
         "wires": [
             [
                 "eae1d6f576cd6e8c",
-                "99f3908ecb4413c2"
+                "99f3908ecb4413c2",
+                "55ffaf1cd9128f22"
             ]
         ]
     },
@@ -679,6 +680,20 @@
         "x": 1380,
         "y": 680,
         "wires": []
+    },
+    {
+        "id": "55ffaf1cd9128f22",
+        "type": "sqlite",
+        "z": "182d3223c1260b67",
+        "mydb": "0342a0cdf5d7ca65",
+        "sqlquery": "fixed",
+        "sql": "UPDATE Cameras SET numDetected = msg.peopleDetected WHERE cameraID = flow.get(\"numDetected\");",
+        "name": "Update camera numDetected",
+        "x": 1690,
+        "y": 640,
+        "wires": [
+            []
+        ]
     },
     {
         "id": "3690872c15f9a63c",
