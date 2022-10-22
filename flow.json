@@ -613,7 +613,7 @@
         "sqlquery": "msg.topic",
         "sql": "",
         "name": "iot DB",
-        "x": 1170,
+        "x": 1270,
         "y": 180,
         "wires": [
             []
@@ -652,8 +652,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 860,
-        "y": 280,
+        "x": 880,
+        "y": 260,
         "wires": []
     },
     {
@@ -669,6 +669,11 @@
                 "p": "topic",
                 "v": "roomnum",
                 "vt": "flow"
+            },
+            {
+                "p": "timestamp",
+                "v": "",
+                "vt": "date"
             }
         ],
         "repeat": "",
@@ -683,7 +688,7 @@
         "wires": [
             [
                 "031274933e5da9a4",
-                "2346d3bf91b09bfe"
+                "c728a0d3be08107c"
             ]
         ]
     },
@@ -708,7 +713,7 @@
         "y": 260,
         "wires": [
             [
-                "63c4f702d66878ce"
+                "11a69c770e94b775"
             ]
         ]
     },
@@ -733,7 +738,7 @@
         "y": 320,
         "wires": [
             [
-                "63c4f702d66878ce"
+                "11a69c770e94b775"
             ]
         ]
     },
@@ -758,34 +763,8 @@
         "y": 380,
         "wires": [
             [
-                "63c4f702d66878ce"
+                "11a69c770e94b775"
             ]
-        ]
-    },
-    {
-        "id": "63c4f702d66878ce",
-        "type": "change",
-        "z": "5f48f9abaf283188",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "roomnum",
-                "pt": "flow",
-                "to": "payload",
-                "tot": "msg",
-                "dc": true
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 690,
-        "y": 340,
-        "wires": [
-            []
         ]
     },
     {
@@ -910,16 +889,61 @@
         "y": 440,
         "wires": [
             [
-                "63c4f702d66878ce"
+                "11a69c770e94b775"
             ]
         ]
     },
     {
-        "id": "2346d3bf91b09bfe",
+        "id": "f7739223468e4b8c",
+        "type": "function",
+        "z": "5f48f9abaf283188",
+        "name": "Insert RFID History Data",
+        "func": "if (msg.topic === \"\") \n{\n    var prevroomnum = flow.get(\"prevroomnum\");\n    var statement = \"INSERT INTO RFIDHistory(RFID, Timestamp, RoomID, EventType) VALUES (\\\"\" + msg.payload + \"\\\", \\\"\" + msg.timestampformat + \"\\\", \" + prevroomnum + \", 0)\";\n}\nelse\n{\n    var statement = \"INSERT INTO RFIDHistory(RFID, Timestamp, RoomID, EventType) VALUES (\\\"\" + msg.payload + \"\\\", \\\"\" + msg.timestampformat + \"\\\", \" + msg.topic + \", 1)\";\n}\nvar newmsg = { topic: statement };\nreturn newmsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1030,
+        "y": 120,
+        "wires": [
+            [
+                "833114b0ec3a4394",
+                "3690872c15f9a63c"
+            ]
+        ]
+    },
+    {
+        "id": "c728a0d3be08107c",
+        "type": "moment",
+        "z": "5f48f9abaf283188",
+        "name": "",
+        "topic": "",
+        "input": "timestamp",
+        "inputType": "msg",
+        "inTz": "Australia/Brisbane",
+        "adjAmount": 0,
+        "adjType": "days",
+        "adjDir": "add",
+        "format": "",
+        "locale": "en-US",
+        "output": "timestampformat",
+        "outputType": "msg",
+        "outTz": "Australia/Brisbane",
+        "x": 780,
+        "y": 120,
+        "wires": [
+            [
+                "f7739223468e4b8c"
+            ]
+        ]
+    },
+    {
+        "id": "833114b0ec3a4394",
         "type": "debug",
         "z": "5f48f9abaf283188",
-        "name": "debug 3",
-        "active": true,
+        "name": "debug 10",
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -927,9 +951,26 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 720,
-        "y": 100,
+        "x": 1240,
+        "y": 60,
         "wires": []
+    },
+    {
+        "id": "11a69c770e94b775",
+        "type": "function",
+        "z": "5f48f9abaf283188",
+        "name": "set flow.roomnum",
+        "func": "if (msg.payload === \"\")\n{\n    flow.set(\"prevroomnum\", flow.get(\"roomnum\"));\n}\nflow.set(\"roomnum\", msg.payload);",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 710,
+        "y": 340,
+        "wires": [
+            []
+        ]
     },
     {
         "id": "e10ba1e868967fb1",
