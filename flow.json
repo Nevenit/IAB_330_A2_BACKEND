@@ -86,55 +86,6 @@
         "wires": []
     },
     {
-        "id": "3ec5d4248c952026",
-        "type": "inject",
-        "z": "182d3223c1260b67",
-        "name": "Camera",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 950,
-        "y": 220,
-        "wires": [
-            [
-                "edb31d5514e790f3"
-            ]
-        ]
-    },
-    {
-        "id": "edb31d5514e790f3",
-        "type": "function",
-        "z": "182d3223c1260b67",
-        "name": "Get variables",
-        "func": "msg.params = { $id: flow.get(\"cameraID\"), $num: flow.get(\"numDetected\") };\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1140,
-        "y": 220,
-        "wires": [
-            [
-                "3c78757cb6a28c73",
-                "bd7d578c3d6a6a9f"
-            ]
-        ]
-    },
-    {
         "id": "a6c119b8f42d1a11",
         "type": "inject",
         "z": "182d3223c1260b67",
@@ -405,37 +356,6 @@
         "wires": []
     },
     {
-        "id": "bd7d578c3d6a6a9f",
-        "type": "debug",
-        "z": "182d3223c1260b67",
-        "name": "variables",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "params",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1120,
-        "y": 260,
-        "wires": []
-    },
-    {
-        "id": "3c78757cb6a28c73",
-        "type": "sqlite",
-        "z": "182d3223c1260b67",
-        "mydb": "0342a0cdf5d7ca65",
-        "sqlquery": "fixed",
-        "sql": "UPDATE Cameras SET numDetected = 5 WHERE cameraID = 1;",
-        "name": "Update camera numDetected",
-        "x": 1410,
-        "y": 220,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "85d4b76ecfd1556e",
         "type": "function",
         "z": "182d3223c1260b67",
@@ -622,7 +542,7 @@
         "z": "182d3223c1260b67",
         "name": "Node-red recieves data from sensor",
         "info": "",
-        "x": 1120,
+        "x": 1060,
         "y": 600,
         "wires": []
     },
@@ -639,7 +559,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1350,
+        "x": 1250,
         "y": 720,
         "wires": []
     },
@@ -654,13 +574,13 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1360,
+        "x": 1260,
         "y": 640,
         "wires": [
             [
                 "eae1d6f576cd6e8c",
                 "99f3908ecb4413c2",
-                "55ffaf1cd9128f22"
+                "dd6b55fc1321e33b"
             ]
         ]
     },
@@ -677,7 +597,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1380,
+        "x": 1280,
         "y": 680,
         "wires": []
     },
@@ -685,14 +605,33 @@
         "id": "55ffaf1cd9128f22",
         "type": "sqlite",
         "z": "182d3223c1260b67",
-        "mydb": "0342a0cdf5d7ca65",
-        "sqlquery": "fixed",
+        "mydb": "367ecc55a7054ddf",
+        "sqlquery": "msg.topic",
         "sql": "UPDATE Cameras SET numDetected = msg.peopleDetected WHERE cameraID = flow.get(\"numDetected\");",
         "name": "Update camera numDetected",
-        "x": 1690,
+        "x": 1750,
         "y": 640,
         "wires": [
             []
+        ]
+    },
+    {
+        "id": "dd6b55fc1321e33b",
+        "type": "function",
+        "z": "182d3223c1260b67",
+        "name": "Create query",
+        "func": "msg.topic = \"UPDATE Cameras SET numDetected = \" + msg.peopleDetected + \" WHERE cameraID = \" + flow.get(\"cameraID\");\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1490,
+        "y": 640,
+        "wires": [
+            [
+                "55ffaf1cd9128f22"
+            ]
         ]
     },
     {
