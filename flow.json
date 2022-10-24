@@ -440,7 +440,7 @@
         "type": "function",
         "z": "182d3223c1260b67",
         "name": "Add heat sources",
-        "func": "function getRandom(min, max) {\n    return Math.floor(Math.random() * (max - min)) + min;\n}\n\n// Add a heatsource to the array\nfunction placeHeatSource(cameraArray, pos, size, temp) {\n    for (let _y = pos[1] - size; _y <= pos[1] + size; _y++) {\n        for (let _x = pos[0] - size; _x <= pos[0] + size; _x++) {\n            if (_x < 0 || _x >= cameraArray.length) {continue;}\n            if (_y < 0 || _y >= cameraArray.length) {continue;}\n            cameraArray[_x][_y] = temp - (Math.abs(pos[0] - _x) + Math.abs(pos[1] - _y));\n        }\n    }\n    return cameraArray;\n}\n\n// Get a random position a heatsource could be placed without touching other heatsources\nfunction getAvaliablePosition(cameraArray, existing, size) {\n    let avaliablePositons = [];\n    for (let y = 0; y < cameraArray.length; y++) {\n        for (let x = 0; x < cameraArray.length; x++) {\n            if (existing.length == 0) { return [getRandom(0, cameraArray.length), getRandom(0, cameraArray.length)]}\n            let doAdd = true;\n            for (let e = 0; e < existing.length; e++) {\n                if (Math.abs(x - existing[e][0]) <= (size * 2 + 1)) {\n                    doAdd = false;\n                    break;\n                }\n                if (Math.abs(y - existing[e][1]) <= (size * 2 + 1)) {\n                    doAdd = false;\n                    break;\n                }\n            }\n            if (doAdd) {\n                avaliablePositons.push([x, y]);\n            }\n            \n        }\n    }\n    return avaliablePositons[getRandom(0, avaliablePositons.length)];\n}\n\n//function getuniquePosition2(cameraArray, existing, size) {\n //   let pos = getAvaliablePosition(cameraArray, existing, size)\n //   return pos;\n//}\n\n\nlet cameraArray = msg.array;\n\n//The number of heat sources to add\nlet heatSourceCount = flow.get(\"numDetected\");\n\n//The temperature of the heatsources\nlet heatSourceTemperature = 36.6;\n\n//The size of the heat source in pixels to all sides \n// size 0 would make a 1x1 heatsource, 1 3x3, 2 5x5 and so on\nlet heatSourceSize = 1;\n\n\n//Stores the position of heatsources\nlet existingHeatSources = [];\n\n\nfor (let i = 0; i < heatSourceCount; i++) {\n    //node.warn(\"69\");\n    let pos = getAvaliablePosition(cameraArray, existingHeatSources, heatSourceSize);\n    //node.warn(pos);\n    //node.warn(\"420\");\n    cameraArray = placeHeatSource(cameraArray, pos, heatSourceSize, heatSourceTemperature);\n    //node.warn(\"what\");\n    existingHeatSources.push(pos);\n}\n//node.warn(existingHeatSources);\nlet arrayString = \"\"\n\nfor (let y = 0; y < cameraArray.length; y++) {\n    for (let x = 0; x < cameraArray.length; x++) {\n        if (cameraArray[y][x] > 32) {\n            arrayString += \"1,\";\n        } else {\n            arrayString += \"0,\";\n        }\n        \n    }\n    arrayString += \"\\n\";\n}\n\nmsg.payload = arrayString;\nmsg.arrayString = arrayString;\nmsg.array = cameraArray;\nmsg.sources = existingHeatSources;\nreturn msg;",
+        "func": "function getRandom(min, max) {\n    return Math.floor(Math.random() * (max - min)) + min;\n}\n\n// Add a heatsource to the array\nfunction placeHeatSource(cameraArray, pos, size, temp) {\n    for (let _y = pos[1] - size; _y <= pos[1] + size; _y++) {\n        for (let _x = pos[0] - size; _x <= pos[0] + size; _x++) {\n            if (_x < 0 || _x >= cameraArray.length) {continue;}\n            if (_y < 0 || _y >= cameraArray.length) {continue;}\n            cameraArray[_x][_y] = temp - (Math.abs(pos[0] - _x) + Math.abs(pos[1] - _y));\n        }\n    }\n    return cameraArray;\n}\n\n// Get a random position a heatsource could be placed without touching other heatsources\nfunction getAvaliablePosition(cameraArray, existing, size) {\n    let avaliablePositons = [];\n    for (let y = 0; y < cameraArray.length; y++) {\n        for (let x = 0; x < cameraArray.length; x++) {\n            if (existing.length == 0) { return [getRandom(0, cameraArray.length), getRandom(0, cameraArray.length)]}\n            let doAdd = true;\n            for (let e = 0; e < existing.length; e++) {\n                if (Math.abs(x - existing[e][0]) <= (size * 2 + 1)) {\n                    doAdd = false;\n                    break;\n                }\n                if (Math.abs(y - existing[e][1]) <= (size * 2 + 1)) {\n                    doAdd = false;\n                    break;\n                }\n            }\n            if (doAdd) {\n                avaliablePositons.push([x, y]);\n            }\n            \n        }\n    }\n    return avaliablePositons[getRandom(0, avaliablePositons.length)];\n}\n\nlet cameraArray = msg.array;\n\n//The number of heat sources to add\nlet heatSourceCount = flow.get(\"numDetected\");\n\n//The temperature of the heatsources\nlet heatSourceTemperature = 36.6;\n\n//The size of the heat source in pixels to all sides \n// size 0 would make a 1x1 heatsource, 1 3x3, 2 5x5 and so on\nlet heatSourceSize = 1;\n\n\n//Stores the position of heatsources\nlet existingHeatSources = [];\n\n\nfor (let i = 0; i < heatSourceCount; i++) {\n    let pos = getAvaliablePosition(cameraArray, existingHeatSources, heatSourceSize);\n    cameraArray = placeHeatSource(cameraArray, pos, heatSourceSize, heatSourceTemperature);\n    existingHeatSources.push(pos);\n}\n//node.warn(existingHeatSources);\nlet arraySimpleString = \"\"\n\nfor (let y = 0; y < cameraArray.length; y++) {\n    for (let x = 0; x < cameraArray.length; x++) {\n        if (cameraArray[y][x] > 32) {\n            arraySimpleString += \"1,\";\n        } else {\n            arraySimpleString += \"0,\";\n        }\n        \n    }\n    arraySimpleString += \"\\n\";\n}\n\n\nlet arrayTrueString = \"123\"\n\nfor (let y = 0; y < cameraArray.length; y++) {\n    for (let x = 0; x < cameraArray.length; x++) {\n        arrayTrueString += cameraArray[y][x] + \",\";\n    }\n    arrayTrueString += \"\\n\";\n}\n\n//msg.payload = cameraArray;\nmsg.arraySimpleString = arraySimpleString;\nmsg.arrayTrueString = arrayTrueString;\nmsg.array = cameraArray;\nmsg.sources = existingHeatSources;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -454,7 +454,8 @@
                 "bf061b52669fb35a",
                 "9d4d0c054e96a8a3",
                 "6e43bb6b516be8ed",
-                "075ebfcf23998e77"
+                "075ebfcf23998e77",
+                "ad18168e8834586c"
             ]
         ]
     },
@@ -501,7 +502,7 @@
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "arrayString",
+        "complete": "arraySimpleString",
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
@@ -513,6 +514,7 @@
         "id": "6e43bb6b516be8ed",
         "type": "file",
         "z": "182d3223c1260b67",
+        "d": true,
         "name": "",
         "filename": "/data/output.txt",
         "filenameType": "str",
@@ -633,6 +635,23 @@
                 "55ffaf1cd9128f22"
             ]
         ]
+    },
+    {
+        "id": "ad18168e8834586c",
+        "type": "debug",
+        "z": "182d3223c1260b67",
+        "name": "Debug array true",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "arrayTrueString",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 770,
+        "y": 800,
+        "wires": []
     },
     {
         "id": "c43f89f7600d2f1e",
