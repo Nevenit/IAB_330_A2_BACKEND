@@ -691,7 +691,7 @@
         "id": "fdb4dd410c1c0d4a",
         "type": "debug",
         "z": "4515619534d06bc2",
-        "name": "debug 2",
+        "name": "Set current room SQL Query",
         "active": false,
         "tosidebar": true,
         "console": false,
@@ -700,8 +700,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 880,
-        "y": 260,
+        "x": 920,
+        "y": 240,
         "wires": []
     },
     {
@@ -832,8 +832,8 @@
         "topic": "",
         "payload": "c65e3be8-849c-46f0-9906-d7df37a4d9fc",
         "payloadType": "str",
-        "x": 600,
-        "y": 580,
+        "x": 580,
+        "y": 500,
         "wires": [
             [
                 "4c768ad9ebf6ed23"
@@ -857,8 +857,8 @@
         "topic": "",
         "payload": "51b304c6-ceb2-404b-b576-5bec8cc4008a",
         "payloadType": "str",
-        "x": 600,
-        "y": 640,
+        "x": 580,
+        "y": 560,
         "wires": [
             [
                 "4c768ad9ebf6ed23"
@@ -882,8 +882,8 @@
         "topic": "",
         "payload": "4d6a4996-0373-4539-b05c-7c93a056a6a5",
         "payloadType": "str",
-        "x": 600,
-        "y": 700,
+        "x": 580,
+        "y": 620,
         "wires": [
             [
                 "4c768ad9ebf6ed23"
@@ -910,8 +910,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 890,
-        "y": 640,
+        "x": 870,
+        "y": 560,
         "wires": [
             []
         ]
@@ -965,7 +965,7 @@
         "id": "658aa10efb6a88c1",
         "type": "debug",
         "z": "4515619534d06bc2",
-        "name": "debug 10",
+        "name": "Set RFID History SQL Query",
         "active": false,
         "tosidebar": true,
         "console": false,
@@ -974,7 +974,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1240,
+        "x": 1160,
         "y": 60,
         "wires": []
     },
@@ -1025,8 +1025,8 @@
         "id": "01edf049c1fcaf34",
         "type": "debug",
         "z": "4515619534d06bc2",
-        "name": "debug 11",
-        "active": true,
+        "name": "Print Current TImestamp",
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -1034,8 +1034,38 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1000,
+        "x": 830,
         "y": 60,
+        "wires": []
+    },
+    {
+        "id": "f6435ab4514db936",
+        "type": "comment",
+        "z": "4515619534d06bc2",
+        "name": "Simulate RFID Scanner, receives RFID UUID",
+        "info": "",
+        "x": 410,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "506771696215540f",
+        "type": "comment",
+        "z": "4515619534d06bc2",
+        "name": "Simulate which rooms scanner",
+        "info": "",
+        "x": 750,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "2bf1c7bacdf5f98f",
+        "type": "comment",
+        "z": "4515619534d06bc2",
+        "name": "Simulate different RFID tags",
+        "info": "",
+        "x": 940,
+        "y": 620,
         "wires": []
     },
     {
@@ -1076,17 +1106,17 @@
         "id": "0524eaeb7660bc6e",
         "type": "debug",
         "z": "88cb21596959a18c",
-        "name": "debug 7",
+        "name": "Set Machine Status SQL Query",
         "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "payload",
+        "complete": "topic",
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 920,
-        "y": 320,
+        "x": 1030,
+        "y": 280,
         "wires": []
     },
     {
@@ -1243,8 +1273,8 @@
         "topic": "",
         "payload": "1",
         "payloadType": "str",
-        "x": 320,
-        "y": 620,
+        "x": 300,
+        "y": 540,
         "wires": [
             [
                 "81b35c989e8a4c8b"
@@ -1268,8 +1298,8 @@
         "topic": "",
         "payload": "2",
         "payloadType": "str",
-        "x": 320,
-        "y": 680,
+        "x": 300,
+        "y": 600,
         "wires": [
             [
                 "81b35c989e8a4c8b"
@@ -1293,8 +1323,8 @@
         "topic": "",
         "payload": "3",
         "payloadType": "str",
-        "x": 320,
-        "y": 740,
+        "x": 300,
+        "y": 660,
         "wires": [
             [
                 "81b35c989e8a4c8b"
@@ -1321,8 +1351,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 730,
-        "y": 680,
+        "x": 510,
+        "y": 600,
         "wires": [
             []
         ]
@@ -1356,7 +1386,7 @@
         "id": "80e11616f71ae045",
         "type": "debug",
         "z": "88cb21596959a18c",
-        "name": "debug 8",
+        "name": "Energy Monitor Sensor Output",
         "active": false,
         "tosidebar": true,
         "console": false,
@@ -1365,8 +1395,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 540,
-        "y": 280,
+        "x": 430,
+        "y": 160,
         "wires": []
     },
     {
@@ -1394,16 +1424,16 @@
         "id": "eda5c3320ca96d3f",
         "type": "debug",
         "z": "88cb21596959a18c",
-        "name": "debug 9",
+        "name": "Machine State (On/Off)",
         "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
+        "complete": "payload",
+        "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 740,
+        "x": 670,
         "y": 280,
         "wires": []
     },
@@ -1428,7 +1458,8 @@
         "y": 120,
         "wires": [
             [
-                "32be23b705b76386"
+                "32be23b705b76386",
+                "d91db83e7a951e55"
             ]
         ]
     },
@@ -1443,12 +1474,77 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1220,
+        "x": 1160,
         "y": 120,
         "wires": [
             [
+                "509113ecb3e7b973",
                 "e2a25e403d3b6d75"
             ]
         ]
+    },
+    {
+        "id": "105272e3e2e746f0",
+        "type": "comment",
+        "z": "88cb21596959a18c",
+        "name": "Simulate different machines sensor",
+        "info": "",
+        "x": 580,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "c4176a363cec44c8",
+        "type": "comment",
+        "z": "88cb21596959a18c",
+        "name": "Simulate different energy levels",
+        "info": "",
+        "x": 570,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "d91db83e7a951e55",
+        "type": "debug",
+        "z": "88cb21596959a18c",
+        "name": "Print Current Timestamp",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "timestampformat",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 990,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "509113ecb3e7b973",
+        "type": "debug",
+        "z": "88cb21596959a18c",
+        "name": "Set Machine History SQL Query",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "topic",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1350,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "d7c0e524c8b9ee9a",
+        "type": "comment",
+        "z": "88cb21596959a18c",
+        "name": "Simulate machine energy monitor sensor to detect machine state",
+        "info": "",
+        "x": 470,
+        "y": 120,
+        "wires": []
     }
 ]
