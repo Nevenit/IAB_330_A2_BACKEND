@@ -503,7 +503,7 @@
         "type": "debug",
         "z": "182d3223c1260b67",
         "name": "People detected",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
