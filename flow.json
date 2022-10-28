@@ -88,7 +88,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 320,
-        "y": 360,
+        "y": 380,
         "wires": [
             [
                 "d19061ee7b1ca918"
@@ -144,7 +144,7 @@
         "to": "",
         "reg": false,
         "x": 570,
-        "y": 400,
+        "y": 420,
         "wires": [
             [
                 "74c1261157f86986"
@@ -251,7 +251,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 320,
-        "y": 400,
+        "y": 420,
         "wires": [
             [
                 "d19061ee7b1ca918"
@@ -281,7 +281,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 320,
-        "y": 440,
+        "y": 460,
         "wires": [
             [
                 "d19061ee7b1ca918"
@@ -302,7 +302,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 760,
-        "y": 400,
+        "y": 420,
         "wires": []
     },
     {
@@ -403,7 +403,6 @@
                 "1d0ffc65c97a15c3",
                 "bf061b52669fb35a",
                 "9d4d0c054e96a8a3",
-                "6e43bb6b516be8ed",
                 "075ebfcf23998e77",
                 "ad18168e8834586c"
             ]
@@ -459,24 +458,6 @@
         "x": 770,
         "y": 760,
         "wires": []
-    },
-    {
-        "id": "6e43bb6b516be8ed",
-        "type": "file",
-        "z": "182d3223c1260b67",
-        "d": true,
-        "name": "",
-        "filename": "/data/output.txt",
-        "filenameType": "str",
-        "appendNewline": true,
-        "createDir": false,
-        "overwriteFile": "true",
-        "encoding": "none",
-        "x": 980,
-        "y": 720,
-        "wires": [
-            []
-        ]
     },
     {
         "id": "f92ff7af120ef533",
@@ -602,6 +583,66 @@
         "x": 770,
         "y": 800,
         "wires": []
+    },
+    {
+        "id": "76d263c699868b0d",
+        "type": "inject",
+        "z": "182d3223c1260b67",
+        "name": "numDetected 4",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "numDetected",
+                "v": "4",
+                "vt": "num"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 320,
+        "y": 500,
+        "wires": [
+            [
+                "d19061ee7b1ca918"
+            ]
+        ]
+    },
+    {
+        "id": "e3b98d74e9bf146c",
+        "type": "inject",
+        "z": "182d3223c1260b67",
+        "name": "numDetected 0",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "numDetected",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 320,
+        "y": 340,
+        "wires": [
+            [
+                "d19061ee7b1ca918"
+            ]
+        ]
     },
     {
         "id": "c43f89f7600d2f1e",
