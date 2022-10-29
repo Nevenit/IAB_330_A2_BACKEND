@@ -622,7 +622,7 @@
         "type": "function",
         "z": "4515619534d06bc2",
         "name": "Create Update Query",
-        "func": "if (msg.topic === \"\")\n{\n    msg.topic = 0;\n}\nvar statement = \"UPDATE RFIDList SET roomID = \" + msg.topic + \" WHERE RFID = \\\"\" + msg.payload + \"\\\"\";\nvar newmsg = {topic: statement};\nreturn newmsg;",
+        "func": "if (msg.topic === \"\")\n{\n    msg.topic = \"NULL\";\n}\nvar statement = \"UPDATE RFIDList SET roomID = \" + msg.topic + \" WHERE RFID = \\\"\" + msg.payload + \"\\\"\";\nvar newmsg = {topic: statement};\nreturn newmsg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
